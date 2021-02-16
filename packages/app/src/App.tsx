@@ -56,6 +56,17 @@ import { entityPage } from './components/catalog/EntityPage';
 import { searchPage } from './components/search/SearchPage';
 import { providers } from './identityProviders';
 import * as plugins from './plugins';
+import { Router as CatalogRouter } from '@backstage/plugin-catalog';
+import { Router as DocsRouter } from '@backstage/plugin-techdocs';
+import { Router as GraphiQLRouter } from '@backstage/plugin-graphiql';
+import { Router as TechRadarRouter } from '@backstage/plugin-tech-radar';
+import { Router as LighthouseRouter } from '@backstage/plugin-lighthouse';
+import { Router as RegisterComponentRouter } from '@backstage/plugin-register-component';
+import { Router as SettingsRouter } from '@backstage/plugin-user-settings';
+import { Router as ImportComponentRouter } from '@backstage/plugin-catalog-import';
+import { Router as TechDocsNextRouter } from '@backstage/plugin-techdocs-next';
+import { Route, Navigate } from 'react-router';
+import { EntityPage } from './components/catalog/EntityPage';
 
 const app = createApp({
   apis,
@@ -133,6 +144,7 @@ const routes = (
       element={<CostInsightsLabelDataflowInstructionsPage />}
     />
     <Route path="/settings" element={<UserSettingsPage />} />
+    <Route path="/techdocs-next" element={<TechDocsNextRouter />} />
   </FlatRoutes>
 );
 
