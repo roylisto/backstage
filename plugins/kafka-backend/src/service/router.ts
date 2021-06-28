@@ -17,7 +17,9 @@
 import express from 'express';
 import Router from 'express-promise-router';
 import { Logger } from 'winston';
+import { errorHandler } from '@backstage/backend-common';
 import { Config } from '@backstage/config';
+import { NotFoundError } from '@backstage/errors';
 import { KafkaApi, KafkaJsApiImpl } from './KafkaApi';
 import _ from 'lodash';
 import { getClusterDetails } from '../config/ClusterReader';
@@ -45,11 +47,19 @@ export const makeRouter = (
     const clusterId = req.params.clusterId;
     const consumerId = req.params.consumerId;
 
+    const kafkaApi = kafkaApiByClusterName[clusterId];
+    if (!kafkaApi) {
+      const candidates = Object.keys(kafkaApiByClusterName)
+        .map(n => `"${n}"`)
+        .join(', ');
+      throw new NotFoundError(
+        `Found no configured cluster "${clusterId}", candidates are ${candidates}`,
+      );
+    }
+
     logger.info(
       `Fetch consumer group ${consumerId} offsets from cluster ${clusterId}`,
     );
-
-    const kafkaApi = kafkaApiByClusterName[clusterId];
 
     const groupOffsets = await kafkaApi.api.fetchGroupOffsets(consumerId);
 
@@ -68,8 +78,11 @@ export const makeRouter = (
         }));
       }),
     );
+
     res.json({ consumerId, offsets: groupWithTopicOffsets.flat() });
   });
+
+  router.use(errorHandler());
 
   return router;
 };

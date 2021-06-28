@@ -111,6 +111,17 @@ describe('router', () => {
       );
     });
 
+    it('handles unknown cluster errors correctly', async () => {
+      const response = await request(app).get('/consumers/unknown/hey/offsets');
+      expect(response.status).toEqual(404);
+      expect(response.body).toMatchObject({
+        error: {
+          message:
+            'Found no configured cluster "unknown", candidates are "dev", "prod"',
+        },
+      });
+    });
+
     it('handles internal error correctly', async () => {
       prodKafkaApi.fetchGroupOffsets.mockRejectedValue(Error('oh no'));
 
