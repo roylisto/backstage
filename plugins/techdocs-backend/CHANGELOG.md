@@ -1,5 +1,13 @@
 # @backstage/plugin-techdocs-backend
 
+## 0.8.5
+
+### Patch Changes
+
+- b47fc34bc: Update "service catalog" references to "software catalog"
+- Updated dependencies
+  - @backstage/techdocs-common@0.6.6
+
 ## 0.8.4
 
 ### Patch Changes

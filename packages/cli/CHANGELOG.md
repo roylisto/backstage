@@ -1,5 +1,11 @@
 # @backstage/cli
 
+## 0.7.3
+
+### Patch Changes
+
+- a93e60fdc: Updated dependencies
+
 ## 0.7.2
 
 ### Patch Changes
