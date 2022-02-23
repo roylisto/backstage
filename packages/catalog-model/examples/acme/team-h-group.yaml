@@ -1,13 +1,13 @@
 apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
-  name: team-d
-  description: Team D Test
+  name: team-h
+  description: Team H
 spec:
   type: team
   profile:
-    displayName: Team D
-    email: team-d@example.com
+    displayName: Team H
+    email: team-h@example.com
     picture: https://avatars.dicebear.com/api/identicon/team-d@example.com.svg?background=%23fff&margin=25
   parent: boxoffice
   children: []
