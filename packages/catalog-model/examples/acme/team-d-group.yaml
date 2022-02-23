@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Group
 metadata:
   name: team-d
-  description: Team D
+  description: Team D Test
 spec:
   type: team
   profile:
